@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import { FavoriteContext } from '../contexts/FavoriteContexts'
+import { FaTrash } from "react-icons/fa"
 
 const Favs = () => {
-    const { fav } = useContext(FavoriteContext)
+    const { fav, removeFav } = useContext(FavoriteContext)
 
     
     return (
@@ -29,8 +30,12 @@ const Favs = () => {
                             })}
                         </div>
                         </div>
-                    </div>                    
-                </div>)}
+                    </div> 
+                    <button onClick={ () => removeFav(p)} className="btn"><FaTrash/></button>                   
+                </div>
+            
+            )}
+            
         </div>
     )
 }
