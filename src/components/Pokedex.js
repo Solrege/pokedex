@@ -1,10 +1,13 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { getPokemons, getPokemonData } from './Api'
 import Pokemon from './Pokemon'
 import Pagination  from './Pagination'
 import Spinner from './Spinner'
 import SearchBar from './SearchBar'
+import { Link } from 'react-router-dom'
+import { FavoriteContext } from '../contexts/FavoriteContexts'
+
 
 
 const Pokedex = () => {
@@ -12,6 +15,8 @@ const Pokedex = () => {
   const [page, setPage] = useState(0)
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
+
+  const { fav } = useContext(FavoriteContext)  
 
   
   const fetchPokemon = async () => { 
@@ -42,7 +47,10 @@ const Pokedex = () => {
 
   return (
     <div>
-      <SearchBar buscarPokemon={buscarPokemon}/>
+      <SearchBar buscarPokemon={buscarPokemon} />
+      <div className='heart'>
+          <Link to='/favs'> Favoritos ❤ {fav.length} </Link>
+      </div>
       <Pagination
       page={page}
       totalPages={total}
@@ -54,11 +62,16 @@ const Pokedex = () => {
       : <div className='pokedex-grid'>
           { pokemons.map((poke) => {
               return (
-                  <Pokemon pokemons={poke} key={poke.name}/>
+                  <Pokemon pokemon={poke} key={poke.name}/>
               )}
           )}
         </div>
       }
+    <Pagination
+      page={page}
+      totalPages={total}
+      setPage={setPage}
+    />
     </div>
   )
 }
