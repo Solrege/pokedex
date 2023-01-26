@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { FavoriteContext } from '../contexts/FavoriteContexts'
+import { Link } from 'react-router-dom'
 
-const Pokemon = (props) => {
+const PokemonCard = (props) => {
   const { fav, addToFav } = useContext(FavoriteContext)
   const p = props.pokemon
 
@@ -14,14 +15,14 @@ const Pokemon = (props) => {
   const blackHeart = "🖤";
   //const heart = fav.includes(p.name) ? redHeart : blackHeart
   const heart = fav.some(e => {
-    return p.name == e.name
+    return p.name === e.name
   }) ? redHeart : blackHeart
 
   return (
     <div className='pokemon-card'>
-      <div className='pokemon-img-container'>
-        <img src={p.sprites.front_default} alt={p.name}/>
-      </div>
+        <div className='pokemon-img'>
+          <img  src={p.sprites.front_default} alt={p.name}/>
+        </div>
 
       <div className='card-body'>
         <div className='card-top'>
@@ -36,6 +37,9 @@ const Pokemon = (props) => {
               )
             })}
           </div>
+          <div className='info'>
+            <Link to={`/${p.id}`} className='btn btn-outline-secondary'>Ver más</Link>
+          </div>
         </div>
       </div>
 
@@ -48,4 +52,4 @@ const Pokemon = (props) => {
   )
 }
 
-export default Pokemon
+export default PokemonCard

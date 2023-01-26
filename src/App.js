@@ -4,8 +4,8 @@ import './App.css';
 import Favs from './components/Favs';
 import Header from './components/Header';
 import Pokedex from './components/Pokedex';
+import Pokemon from './components/Pokemon/Pokemon';
 import { FavoriteProvider } from './contexts/FavoriteContexts';
-
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
           <Header/>
           <Routes>
             <Route path='' element={<Pokedex/>}/>
+            <Route path='/:pokemonId' element={ <Pokemon/> }/>
             <Route path='/favs' element={<Favs/>}/>
           </Routes>
         </BrowserRouter>

@@ -1,16 +1,18 @@
 import { useContext } from 'react'
 import { FavoriteContext } from '../contexts/FavoriteContexts'
 import { FaTrash } from "react-icons/fa"
+import {Link} from "react-router-dom";
 
 const Favs = () => {
     const { fav, removeFav } = useContext(FavoriteContext)
 
     
     return (
-        <div className='container'>
+        <div>
             <h3>Favoritos</h3>
             <hr/>
-            {fav.map( (p) => 
+            <div className='pokedex-grid'>
+                {fav.map( (p) =>
                 <div className='pokemon-card'>
                     <div className='pokemon-img-container'>
                         <img src={p.sprites.front_default} alt={p.name}/>
@@ -30,11 +32,15 @@ const Favs = () => {
                             })}
                         </div>
                         </div>
+                        <div className='info'>
+                            <Link to={`/${p.id}`} className='btn btn-outline-secondary'>Ver más</Link>
+                        </div>
                     </div> 
-                    <button onClick={ () => removeFav(p)} className="btn"><FaTrash/></button>                   
+                    <button onClick={ () => removeFav(p)} className="btn heart"><FaTrash/></button>
+
                 </div>
-            
-            )}
+                )}
+            </div>
             
         </div>
     )

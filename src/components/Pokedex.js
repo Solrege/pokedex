@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { getPokemons, getPokemonData } from './Api'
-import Pokemon from './Pokemon'
+import PokemonCard from './PokemonCard'
 import Pagination  from './Pagination'
-import Spinner from './Spinner'
+import Spinner from './Spinner/Spinner'
 import SearchBar from './SearchBar'
 import { Link } from 'react-router-dom'
 import { FavoriteContext } from '../contexts/FavoriteContexts'
@@ -48,7 +48,7 @@ const Pokedex = () => {
   return (
     <div>
       <SearchBar buscarPokemon={buscarPokemon} />
-      <div className='heart'>
+      <div className='fav'>
           <Link to='/favs'> Favoritos ❤ {fav.length} </Link>
       </div>
       <Pagination
@@ -62,7 +62,7 @@ const Pokedex = () => {
       : <div className='pokedex-grid'>
           { pokemons.map((poke) => {
               return (
-                  <Pokemon pokemon={poke} key={poke.name}/>
+                  <PokemonCard pokemon={poke} key={poke.name}/>
               )}
           )}
         </div>
